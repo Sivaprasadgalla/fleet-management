@@ -17,7 +17,7 @@ const app = express();
 const PORT = process.env.PORT || 8000
 
 connectDB();
-
+console.log(process.env.MONGOOSE_URI); 
 app.use(cors());
 app.use(express.json());
 
