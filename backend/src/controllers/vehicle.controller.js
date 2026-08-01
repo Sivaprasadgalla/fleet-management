@@ -10,7 +10,7 @@ const createVehicle = async(req,res)=>{
         }
         const {userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
             PermitExpiry,status
-        } =req.query;
+        } =req.body;
        const vehicleExist = await Vehicle.findOne({user:userId,registerNumber})
        if(vehicleExist){
          return res.status(400).json({message:"Vehicle Already Exist"})
@@ -56,7 +56,7 @@ const updateVehicle = async(req,res)=>{
         const {id} =req.params;
         const {userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
             PermitExpiry,status
-        } =req.query;
+        } =req.body;
         const updateOne = await Vehicle.findByIdAndUpdate(
             id,
             {user:userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,

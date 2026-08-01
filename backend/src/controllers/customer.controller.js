@@ -9,7 +9,7 @@ const createCustomer = async(req,res)=>{
                 errors:errors.array().map((err)=>err.msg).join(', ')});
         }
         const {userId,firstName,lastName,phoneNumber,email,
-            address,city,state,pincode,companyName,customerType, status} =req.query;
+            address,city,state,pincode,companyName,customerType, status} =req.body;
         const userExist = await Customer.findOne({user:userId,phoneNumber})
         if(userExist){
             return res.status(400).json({message:"Customer Already Exist"})
@@ -54,7 +54,7 @@ const updateCustomer = async(req,res)=>{
         }
         const {id}=req.params;
         const {userId,firstName,lastName,phoneNumber,email,
-            address,city,state,pincode,companyName,customerType, status} =req.query;
+            address,city,state,pincode,companyName,customerType, status} =req.body;
         const updateOne = await Customer.findByIdAndUpdate(
             id,
             {user:userId,firstName,lastName,phoneNumber,email,

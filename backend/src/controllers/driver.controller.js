@@ -9,7 +9,7 @@ const createDriver =async(req,res)=>{
                 errors:errors.array().map((err)=>err.msg).join(', ')
             })
         }
-        const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.query;
+        const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.body;
         const driverExits = await Driver.findOne({user:userId,email})
         if(driverExits){
             return res.status(400).json({message:"Driver Already Exist!!"})
@@ -52,7 +52,7 @@ const updateDriver =async(req,res)=>{
             })
         }
        const {id} =req.params;
-    const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.query;
+    const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.body;
     const update = await Driver.findByIdAndUpdate(
         id,
         {user:userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status},

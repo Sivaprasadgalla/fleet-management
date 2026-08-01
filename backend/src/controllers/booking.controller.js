@@ -10,7 +10,7 @@ const createBooking = async(req,res)=>{
         }
        const {userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,
         bookingType,totalDistance,totalAmount,paymentStatus,bookingStatus,remarks
-       } =req.query;
+       } =req.body;
       const bookingExist = await Booking.findOne({user:userId,driver,vehicle,pickupDate})
       if(bookingExist){
         return res.status(400).json({message:"Driver And Vehicle Already Booked For This Date."})
@@ -51,7 +51,7 @@ const updateBooking = async(req,res)=>{
         const {id}=req.params;
         const {userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,
         bookingType,totalDistance,totalAmount,paymentStatus,bookingStatus,remarks
-       } =req.query;
+       } =req.body;
        const updateBook = await Booking.findByIdAndUpdate(
         id,
         {user:userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,

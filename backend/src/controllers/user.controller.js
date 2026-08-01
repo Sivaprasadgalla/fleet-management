@@ -15,7 +15,7 @@ const register = async (req, res) => {
           .join(", "),
       });
     }
-    const { firstName, lastName, email, password, phoneNumber } = req.query;
+    const { firstName, lastName, email, password, phoneNumber } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res.status(400).json({ message: "User Already Exist" });
@@ -122,7 +122,7 @@ const createUser = async (req, res) => {
       role,
       profilePhoto,
       status,
-    } = req.query;
+    } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res.status(400).json({ message: "User Already Exist" });
@@ -173,7 +173,7 @@ const changePassword = async (req, res) => {
           .join(", "),
       });
     }
-    const { userId, currentPassword, newPassword } = req.query;
+    const { userId, currentPassword, newPassword } = req.body;
     const user = await User.findOne({ _id: userId });
     const checkCurrentPassword = await bcrypt.compare(
       currentPassword,
@@ -217,7 +217,7 @@ const updateUser = async (req, res) => {
       role,
       profilePhoto,
       status,
-    } = req.query;
+    } = req.body;
     var userDetails = null;
     //admin updating the user details
     if (id) {
