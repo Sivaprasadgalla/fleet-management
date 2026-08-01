@@ -10,7 +10,7 @@ const createBooking = async(req,res)=>{
         }
        const {userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,
         bookingType,totalDistance,totalAmount,paymentStatus,bookingStatus,remarks
-       } =req.body;
+       } =req.query;
       const bookingExist = await Booking.findOne({user:userId,driver,vehicle,pickupDate})
       if(bookingExist){
         return res.status(400).json({message:"Driver And Vehicle Already Booked For This Date."})
@@ -26,7 +26,7 @@ const createBooking = async(req,res)=>{
 
 const getAllBookings = async(req,res)=>{
     try {
-         const {userId}=req.body;
+         const {userId}=req.query;
          const getAll = await Booking.find({user:userId})
          res.status(200).json({message:"All Bookings",data:getAll})
     } catch (error) {
@@ -37,7 +37,7 @@ const getAllBookings = async(req,res)=>{
 const getOneBooking = async(req,res)=>{
     try {
         const {id}=req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const getOne = await Booking.findById({_id:id,user:userId});
         res.status(200).json({message:"One Booking Details",data:getOne});
 
@@ -51,7 +51,7 @@ const updateBooking = async(req,res)=>{
         const {id}=req.params;
         const {userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,
         bookingType,totalDistance,totalAmount,paymentStatus,bookingStatus,remarks
-       } =req.body;
+       } =req.query;
        const updateBook = await Booking.findByIdAndUpdate(
         id,
         {user:userId,customer,vehicle,driver,pickupLocation,dropLocation,pickupDate,returnDate,
@@ -68,7 +68,7 @@ const updateBooking = async(req,res)=>{
 const deleteBooking = async(req,res)=>{
     try {
         const {id}=req.params;
-        const {userId}=req.body;
+        const {userId}=req.query;
         const deleteBook = await Booking.findByIdAndDelete({_id:id,user:userId})
         res.status(200).json({message:"Booking Deleted Successfully"})
 

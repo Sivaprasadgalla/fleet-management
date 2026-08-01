@@ -9,8 +9,11 @@ const createDriver =async(req,res)=>{
                 errors:errors.array().map((err)=>err.msg).join(', ')
             })
         }
-        const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.body;
-        
+        const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.query;
+        const driverExits = await Driver.findOne({user:userId,email})
+        if(driverExits){
+            return res.status(400).json({message:"Driver Already Exist!!"})
+        }
         const newDriver = await Driver.create({user:userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status})
         res.status(201).json({message:"Driver Created Successfully"})
 
@@ -21,7 +24,7 @@ const createDriver =async(req,res)=>{
 
 const getAllDrivers = async(req,res)=>{
     try {
-        const {userId} =req.body;
+        const {userId} =req.query;
         const allDrivers = await Driver.find({user:userId})
         res.status(200).json({message:"All Driver Details",data:allDrivers})
     } catch (error) {
@@ -32,7 +35,7 @@ const getAllDrivers = async(req,res)=>{
 const getOneDriver =async(req,res)=>{
     try {
         const {id} = req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const getOne = await Driver.findOne({_id:id,user:userId})
         res.status(200).json({message:"One Driver Details",data:getOne})
     } catch (error) {
@@ -49,7 +52,7 @@ const updateDriver =async(req,res)=>{
             })
         }
        const {id} =req.params;
-    const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.body;
+    const {userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status} =req.query;
     const update = await Driver.findByIdAndUpdate(
         id,
         {user:userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status},
@@ -65,7 +68,7 @@ const updateDriver =async(req,res)=>{
 const deleteDriver = async(req,res)=>{
     try {
         const {id} = req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const deleteDriverDetail = await Driver.findByIdAndDelete({_id:id, user:userId})
         res.status(200).json({message:"Driver Details Deleted Successfully"})
     } catch (error) {

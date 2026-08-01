@@ -10,7 +10,7 @@ const createVehicle = async(req,res)=>{
         }
         const {userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
             PermitExpiry,status
-        } =req.body;
+        } =req.query;
        const vehicleExist = await Vehicle.findOne({user:userId,registerNumber})
        if(vehicleExist){
          return res.status(400).json({message:"Vehicle Already Exist"})
@@ -25,7 +25,7 @@ const createVehicle = async(req,res)=>{
 
 const getAllVehicles =async(req,res)=>{
 try {
-       const {userId} =req.body;
+       const {userId} =req.query;
     const getAll = await Vehicle.find({user:userId})
     res.status(200).json({message:"All Vehicle Details",data:getAll}) 
 } catch (error) {
@@ -36,7 +36,7 @@ try {
 
 const getOneVehicle =async(req,res)=>{
     try {
-        const {userId} = req.body;
+        const {userId} = req.query;
         const {id} =req.params;
         const getOne = await Vehicle.findOne({_id:id,user:userId})
         res.status(200).json({message:"One Vehicle Details",data:getOne})
@@ -56,7 +56,7 @@ const updateVehicle = async(req,res)=>{
         const {id} =req.params;
         const {userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
             PermitExpiry,status
-        } =req.body;
+        } =req.query;
         const updateOne = await Vehicle.findByIdAndUpdate(
             id,
             {user:userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
@@ -73,7 +73,7 @@ const updateVehicle = async(req,res)=>{
 const deleteVehicle = async(req,res)=>{
     try {
         const {id}=req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const deleteOne = await Vehicle.findByIdAndDelete({_id:id,user:userId});
         res.status(200).json({message:"Vehicle Deleted Successfully"});
     } catch (error) {

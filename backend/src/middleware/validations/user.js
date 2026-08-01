@@ -39,4 +39,19 @@ const loginValidation =[
     .withMessage("Password must be 8 characters"),
 ]
 
-module.exports ={registerValidation,loginValidation}
+const passwordValidation =[
+    body('currentPassword')
+    .notEmpty()
+    .withMessage(" Current Password is required")
+    .isLength(8)
+    .withMessage("Current Password must be 8 characters"),
+    body('newPassword')
+    .notEmpty()
+    .withMessage("New Password is required")
+    .isLength(8)
+    .withMessage("New Password must be 8 characters"),
+]
+
+
+
+module.exports ={registerValidation,loginValidation,passwordValidation}

@@ -9,7 +9,7 @@ const createCustomer = async(req,res)=>{
                 errors:errors.array().map((err)=>err.msg).join(', ')});
         }
         const {userId,firstName,lastName,phoneNumber,email,
-            address,city,state,pincode,companyName,customerType, status} =req.body;
+            address,city,state,pincode,companyName,customerType, status} =req.query;
         const userExist = await Customer.findOne({user:userId,phoneNumber})
         if(userExist){
             return res.status(400).json({message:"Customer Already Exist"})
@@ -26,7 +26,7 @@ const createCustomer = async(req,res)=>{
 
 const getAllCustomers = async(req,res)=>{
     try {
-        const {userId} =req.body;
+        const {userId} =req.query;
         const getAll = await Customer.find({user:userId});
         res.status(200).json({message:"All Customers Details",data:getAll})
     } catch (error) {
@@ -37,7 +37,7 @@ const getAllCustomers = async(req,res)=>{
 const getOneCustomer = async(req,res)=>{
     try {
         const {id}=req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const getOne = await Customer.findOne({_id:id,user:userId})
         res.status(200).json({message:"One Customer Details",data:getOne})
     } catch (error) {
@@ -54,7 +54,7 @@ const updateCustomer = async(req,res)=>{
         }
         const {id}=req.params;
         const {userId,firstName,lastName,phoneNumber,email,
-            address,city,state,pincode,companyName,customerType, status} =req.body;
+            address,city,state,pincode,companyName,customerType, status} =req.query;
         const updateOne = await Customer.findByIdAndUpdate(
             id,
             {user:userId,firstName,lastName,phoneNumber,email,
@@ -70,7 +70,7 @@ const updateCustomer = async(req,res)=>{
 const deleteCustomer = async(req,res)=>{
     try {
         const {id}=req.params;
-        const {userId} =req.body;
+        const {userId} =req.query;
         const deleteOne = await Customer.findByIdAndDelete({_id:id,user:userId})
         res.status(200).json({message:"Customer Deleted Successfully"})
 
