@@ -3,7 +3,7 @@ import React from 'react'
 const Stats = () => {
   return (
      <section className="border-y border-white/10 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-6 py-6 lg:py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
 
           {[
             ["24/7", "Fleet Visibility"],

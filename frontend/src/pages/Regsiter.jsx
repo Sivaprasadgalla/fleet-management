@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../app/users/userActions";
+import logo from "../../public/fleet-fusion-dark.png";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex">
+    <div className="bg-slate-950 text-white flex pt-16 lg:pt-20">
       {/* ================= LEFT ================= */}
       <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 to-slate-950" />
@@ -59,39 +60,11 @@ const Register = () => {
         <div className="relative z-10 p-12 xl:p-20 flex flex-col justify-between w-full">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 w-fit">
-            <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 17h14M7 17V9l2-4h6l2 4v8M5 13h14M8 17v2m8-2v2"
-                />
-              </svg>
-            </div>
-
-            <div>
-              <h1 className="text-xl font-bold">
-                Fleet<span className="text-blue-500">Flow</span>
-              </h1>
-
-              <p className="text-[9px] text-slate-500 uppercase tracking-widest">
-                Management System
-              </p>
-            </div>
+            <img src={logo} alt="Fleet Fusion Logo" className="max-w-[50%]" />
           </Link>
 
           {/* Content */}
           <div>
-            <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest">
-              Get Started
-            </p>
-
             <h2 className="text-5xl xl:text-6xl font-bold leading-tight mt-5">
               Build a smarter
               <br />

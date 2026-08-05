@@ -4,7 +4,7 @@ const HowItWorks = () => {
   return (
     <section
       id="how-it-works"
-      className="py-28 px-6 bg-white/[0.02] border-y border-white/10"
+      className="py-14 lg:py-28 px-6 bg-white/[0.02] border-y border-white/10"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto">

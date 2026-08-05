@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-36 pb-24 px-6">
+    <section className="relative pt-10 lg:pt-36 pb-8 md:pb-24 px-6">
       {/* Background glow */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/20 blur-[140px] rounded-full pointer-events-none" />
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../app/users/userActions";
+import logo from "../../public/fleet-fusion-dark.png";
 
 
 const Login = () => {
@@ -33,9 +34,9 @@ const Login = () => {
       navigate("/dashboard");
     }
   };
-
+  
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex">
+    <div className="bg-slate-950 text-white flex pt-16 lg:pt-20">
 
       {/* ================= LEFT SIDE ================= */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
@@ -52,44 +53,12 @@ const Login = () => {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 w-fit">
-
-            <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
-
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 17h14M7 17V9l2-4h6l2 4v8M5 13h14M8 17v2m8-2v2"
-                />
-              </svg>
-
-            </div>
-
-            <div>
-              <h1 className="text-xl font-bold">
-                Fleet<span className="text-blue-500">Flow</span>
-              </h1>
-
-              <p className="text-[9px] text-slate-500 uppercase tracking-widest">
-                Management System
-              </p>
-            </div>
-
+            <img src={logo} alt="Fleet Fusion Logo" className="max-w-[50%]" />
           </Link>
 
 
           {/* Main Content */}
           <div className="max-w-xl">
-
-            <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest">
-              Fleet Management
-            </p>
 
             <h2 className="text-5xl xl:text-6xl font-bold leading-tight mt-5">
 
@@ -281,9 +250,9 @@ const Login = () => {
 
 
             {/* Error */}
-            {error && (
+            {error != null && (
               <div className="px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                {error}
+                {error.message}
               </div>
             )}
 

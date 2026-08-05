@@ -2,9 +2,9 @@ import React from "react";
 
 const Features = () => {
   return (
-    <section id="features" className="py-28 px-6">
+    <section id="features" className="py-14 md:py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-2xl mb-8 md:mb-16">
           <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest">
             Powerful Features
           </p>

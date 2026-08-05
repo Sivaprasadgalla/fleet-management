@@ -2,7 +2,7 @@ import React from "react";
 
 const Modules = () => {
   return (
-    <section id="modules" className="py-28 px-6">
+    <section id="modules" className="py-14 lg:py-28 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest">
@@ -19,7 +19,7 @@ const Modules = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="mt-8 md:mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {["Vehicles", "Drivers", "Customers", "Bookings", "Expenses"].map(
             (item, index) => (
               <div
