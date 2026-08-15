@@ -15,7 +15,7 @@ const createDriver =async(req,res)=>{
             return res.status(400).json({message:"Driver Already Exist!!"})
         }
         const newDriver = await Driver.create({user:userId,firstName,lastName,phoneNumber,email,licenseNumber,licenseExpiry,status})
-        res.status(201).json({message:"Driver Created Successfully"})
+        res.status(201).json({message:"Driver Created Successfully", data : newDriver})
 
     } catch (error) {
         res.status(500).json({message:"Server Error Occured",error:error.message})

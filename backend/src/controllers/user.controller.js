@@ -200,6 +200,7 @@ const changePassword = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.status(400).json({
         message: "All Fields Are Required",
@@ -209,6 +210,7 @@ const updateUser = async (req, res) => {
           .join(", "),
       });
     }
+
     const {
       userId,
       id,
@@ -220,40 +222,104 @@ const updateUser = async (req, res) => {
       profilePhoto,
       status,
     } = req.body;
-    var userDetails = null;
-    //admin updating the user details
-    if (id) {
-      const userData = await User.findOne({ _id: id });
-      var userDetails = await User.findByIdAndUpdate(
-        userId,
-        { firstName, lastName, email, phoneNumber, role, profilePhoto, status },
-        { new: true, runValidators: true },
-      );
-    }
-    // console.log(userData);
-     //admin or user itself updating the details
-    const requestedUser = await User.findOne({ _id: userId });
+
+    // ==========================================
+    // 1. Check the logged-in/requesting user
+    // ==========================================
+
+    const requestedUser = await User.findById(userId);
+
     if (!requestedUser) {
-      return res.status(403).json({ message: "User Not Found!!" });
+      return res.status(403).json({
+        message: "User Not Found!!",
+      });
     }
 
-    var userDetails = await User.findByIdAndUpdate(
+    // ==========================================
+    // 2. Admin updating another user
+    // ==========================================
+
+    if (id) {
+      const userData = await User.findById(id);
+
+      if (!userData) {
+        return res.status(404).json({
+          message: "User to update not found",
+        });
+      }
+
+      // Check duplicate email
+      if (email && email !== userData.email) {
+        const emailExists = await User.findOne({
+          email,
+          _id: { $ne: id },
+        });
+
+        if (emailExists) {
+          return res.status(400).json({
+            message: "Email Already Exists",
+          });
+        }
+      }
+
+      const userDetails = await User.findByIdAndUpdate(
+        id,
+        {
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          role,
+          profilePhoto,
+          status,
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      return res.status(200).json({
+        message: "User Updated Successfully",
+        data: userDetails,
+      });
+    }
+
+    // ==========================================
+    // 3. User updating their own details
+    // ==========================================
+
+    const userDetails = await User.findByIdAndUpdate(
       userId,
-      { firstName, lastName, phoneNumber, profilePhoto },
-      { new: true, runValidators: true },
+      {
+        firstName,
+        lastName,
+        phoneNumber,
+        profilePhoto,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
     );
 
     if (!userDetails) {
-      return res.status(401).json({ message: "User Data Missing!!" });
+      return res.status(404).json({
+        message: "User Data Missing!!",
+      });
     }
 
-    res
-      .status(200)
-      .json({ message: "User Updated Successfully", data: userDetails });
+    return res.status(200).json({
+      message: "User Updated Successfully",
+      data: userDetails,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Server error occured", error: error.message });
+    console.error("UPDATE USER ERROR:", error);
+
+    return res.status(500).json({
+      message: "Server error occurred",
+      error: error.message,
+    });
   }
 };
 

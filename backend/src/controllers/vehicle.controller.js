@@ -17,7 +17,7 @@ const createVehicle = async(req,res)=>{
        }
        const newVechile = await Vehicle.create({user:userId,registerNumber,brand,year,type,fuelType,seatCapacity,InsuranceNumber,InsuranceExpiry,
             PermitExpiry,status})
-        res.status(201).json({message:"Vehicle Registered Successfully"})
+        res.status(201).json({message:"Vehicle Registered Successfully", data: newVechile})
     } catch (error) {
         res.status(500).json({message:"Server Error Occured",error:error.message})
     }
