@@ -221,13 +221,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Error */}
-            {error && (
-              <div className="px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                {error}
-              </div>
-            )}
-
             {/* Terms */}
             <div className="flex items-start gap-3">
               <input
