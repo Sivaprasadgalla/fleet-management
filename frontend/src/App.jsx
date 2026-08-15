@@ -1,20 +1,20 @@
-import React from "react";
 import FrontPage from "./pages/FrontPage";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Regsiter";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Dashboard from "./pages/dashboard/main";
 import DashboardLayout from "./components/Layout/DashboardLayout";
 import MainLayout from "./components/Layout/MainLayout";
 import Users from './pages/dashboard/Users';
 import Drivers from "./pages/dashboard/Drivers";
+import Customers from "./pages/dashboard/Customers";
+import SettingsPage from "./pages/dashboard/Settings";
+import { ToastProvider } from "./components/ui/Toast";
 
 
 const App = () => {
   return (
-    <div>
+    <ToastProvider>
       <Routes>
         {/* Public Website */}
         <Route  element={<MainLayout />}>
@@ -29,14 +29,14 @@ const App = () => {
 
           <Route path="users" element={<Users />} />
           <Route path='drivers' element={<Drivers/>}/>
-          {/* <Route path="vehicles" element={<Vehicles />} />
-
           <Route path="customers" element={<Customers />} />
+          <Route path="settings" element={<SettingsPage />} />
+          {/* <Route path="vehicles" element={<Vehicles />} />
 
           <Route path="expenses" element={<Expenses />} />  */}
         </Route>
       </Routes>
-    </div>
+    </ToastProvider>
   );
 };
 

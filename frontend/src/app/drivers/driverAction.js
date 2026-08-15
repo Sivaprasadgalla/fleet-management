@@ -15,9 +15,9 @@ export const createDriver = createAsyncThunk(
 
 export const getDrivers = createAsyncThunk(
     '/driver/get-drivers',
-    async(_,thunkApi)=> {
+    async(userId,thunkApi)=> {
         try {
-            const response = await driverService.getDrivers();
+            const response = await driverService.getDrivers(userId);
             return response.data 
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data)
@@ -39,7 +39,7 @@ export const getDriver = createAsyncThunk(
 
 export const updateDriver = createAsyncThunk(
     '/driver/update-driver',
-    async(id,payload,thunkApi) =>{
+    async({ id, ...payload },thunkApi) =>{
            try {
              const response = await driverService.updateDriver(id,payload);
              return response.data
@@ -51,13 +51,12 @@ export const updateDriver = createAsyncThunk(
 
 export const deleteDriver = createAsyncThunk(
     '/driver/delete-driver',
-    async(id,thunkApi) => {
+    async({ id, userId },thunkApi) => {
         try {
-            const response = await driverService.deleteDriver(id);
+            const response = await driverService.deleteDriver(id, userId);
             return response.data
         } catch (error) {
            return thunkApi.rejectWithValue(error.response.data)            
         }
     }
 )
-

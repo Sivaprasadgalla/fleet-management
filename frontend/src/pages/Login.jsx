@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../app/users/userActions";
 import logo from "../media/fleet-fusion-dark.png";
+import { useToast } from "../components/ui/Toast";
 
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const { loading, error } = useSelector(
     (state) => state.auth
@@ -28,10 +30,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await dispatch(login(formData));
-
-    if (login.fulfilled.match(result)) {
+    try {
+      await dispatch(login(formData)).unwrap();
+      toast("Welcome back. You are now signed in.", "success");
       navigate("/dashboard");
+    } catch (loginError) {
+      toast(loginError?.message || loginError?.error || "Unable to sign in. Check your email and password.", "error");
     }
   };
   

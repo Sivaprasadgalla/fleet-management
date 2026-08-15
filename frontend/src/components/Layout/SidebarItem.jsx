@@ -4,10 +4,12 @@ export default function SidebarItem({
     icon: Icon,
     name,
     path,
+    onNavigate,
 }) {
     return (
         <NavLink
             to={path} end
+            onClick={onNavigate}
             className={({ isActive }) =>
                 `flex items-center gap-3 rounded-xl px-4 py-3 transition
                 ${

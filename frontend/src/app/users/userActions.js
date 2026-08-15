@@ -86,14 +86,14 @@ export const updateUser = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
     '/user/delete-user',
-    async(id,thunkApi) =>{
-        try {
-            const response = await userService.deleteUser(id);
+    async(payload,thunkApi) =>{
+       try {
+        const id = typeof payload === "string" ? payload : payload.id;
+        const response = await userService.deleteUser(id);
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data);
         }
     }
 ) 
-
 

@@ -30,7 +30,7 @@ const driverSlice = createSlice({
         })
         .addCase(updateDriver.fulfilled, (state,action)=> {
             state.loading = false;
-            const index = state.drivers.findIndex(driver._id === action.payload._id);
+            const index = state.drivers.findIndex((driver) => driver._id === action.payload.data?._id);
             if(index !== -1){
                 state.drivers[index] = action.payload.data
             }
@@ -38,7 +38,7 @@ const driverSlice = createSlice({
         })
         .addCase(deleteDriver.fulfilled, (state,action) => {
             state.loading = false;
-            state.drivers = state.drivers.filter(driver => driver._id !== action.payload._id)
+            state.drivers = state.drivers.filter(driver => driver._id !== action.meta.arg.id)
              state.message = "Driver Deleted Successfully";
         })
 

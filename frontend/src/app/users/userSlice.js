@@ -22,7 +22,7 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(changePassword.fulfilled, (state, action) => {
+      .addCase(changePassword.fulfilled, (state) => {
         state.loading = false;
         state.message = "Password Updated Successfully";
       })
@@ -42,7 +42,7 @@ const usersSlice = createSlice({
 
       .addCase(createUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.users.push(action.payload);
+        state.users.push(action.payload.data);
         state.message = "User Created Successfully";
       })
 
@@ -50,11 +50,11 @@ const usersSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         const index = state.users.findIndex(
-          (user) => user._id === action.payload._id,
+          (user) => user._id === action.payload.data?._id,
         );
 
         if (index !== -1) {
-          state.users[index] = action.payload;
+          state.users[index] = action.payload.data;
         }
         state.message = "User Updated Successfully";
       })
@@ -63,7 +63,7 @@ const usersSlice = createSlice({
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.loading = false;
         state.users = state.users.filter(
-          (user) => user._id !== action.payload._id,
+          (user) => user._id !== action.meta.arg.id,
         );
         state.message = "User Deleted Successfully";
       })

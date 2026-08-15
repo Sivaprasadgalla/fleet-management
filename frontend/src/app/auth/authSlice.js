@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register } from "../users/userActions";
 
+export const getPersistedUser = () => {
+  try { return JSON.parse(localStorage.getItem("fleetUser")) || null; }
+  catch { localStorage.removeItem("fleetUser"); return null; }
+};
+
+const savedUser = getPersistedUser();
+
 const initialState = {
-  user: null,
+  user: savedUser,
   accessToken: localStorage.getItem("accessToken"),
   loading: false,
   error: null,
@@ -13,10 +20,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    hydrateUser(state, action) {
+      const persistedUser = action.payload || getPersistedUser();
+      if (persistedUser) state.user = persistedUser;
+    },
+    updateLoggedInUser(state, action) {
+      state.user = action.payload;
+      localStorage.setItem("fleetUser", JSON.stringify(action.payload));
+    },
     logOut(state) {
       state.user = null;
       state.accessToken = null;
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("fleetUser");
     },
   },
   extraReducers: (builder) => {
@@ -32,6 +48,7 @@ const authSlice = createSlice({
         state.accessToken = action.payload.accessToken;
         state.message = "User Logged In Successfully";
         localStorage.setItem("accessToken", action.payload.accessToken);
+        localStorage.setItem("fleetUser", JSON.stringify(action.payload.user));
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false, 
@@ -54,6 +71,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {logOut} = authSlice.actions
+export const {hydrateUser, logOut, updateLoggedInUser} = authSlice.actions
 export default authSlice.reducer
-

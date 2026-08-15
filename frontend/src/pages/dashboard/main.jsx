@@ -1,14 +1,14 @@
 export default function Dashboard() {
   return (
-    <div>
-      <div className="mb-8 mt-10">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+    <div className="py-2 sm:py-4">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold sm:text-3xl">Dashboard</h1>
 
         <p className="text-slate-500 mt-2">Welcome back 👋</p>
       </div>
 
-      <div className="border-2 border-dashed border-slate-300 rounded-2xl h-[600px] flex items-center justify-center">
-        <h2 className="text-2xl text-slate-400">
+      <div className="flex min-h-[320px] items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 p-6 sm:min-h-[500px]">
+        <h2 className="text-center text-lg text-slate-400 sm:text-2xl">
           Dashboard Components Coming Next →
         </h2>
       </div>

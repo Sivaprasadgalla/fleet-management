@@ -4,8 +4,8 @@ const customerService ={
     createCustomer(customerData){
         return api.post('/customer/create',customerData);
     },
-    getCustomers(){
-        return api.get('/customer/get-customers');
+    getCustomers(userId){
+        return api.get('/customer/get-customers', { params: { userId } });
     },
     getCustomer(id){
         return api.get(`/customer/get-customer/${id}`);
@@ -13,8 +13,8 @@ const customerService ={
     updateCustomer(id,updatedData){
         return api.put(`/customer/update-customer/${id}`,updatedData)
     },
-    deleteCustomer(id){
-        return api.delete(`/customer/delete-customer/${id}`)
+    deleteCustomer(id, userId){
+        return api.delete(`/customer/delete-customer/${id}`, { params: { userId } })
     }
 }
 
