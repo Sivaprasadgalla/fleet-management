@@ -15,7 +15,7 @@ export default function OffCanvas({ open, title, description, children, onClose 
         aria-modal="true"
         aria-label={title}
         role="dialog"
-        initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 34 }} className="absolute inset-y-0 right-0 flex w-full max-w-xl flex-col bg-white shadow-2xl sm:w-[min(34rem,calc(100vw-1rem))]"
+        initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 34 }} className="absolute inset-y-0 right-0 flex w-full max-w-xl flex-col bg-white h-auto overflow-y-scroll shadow-2xl sm:w-[min(34rem,calc(100vw-1rem))]"
       >
         <header className="flex items-start justify-between border-b border-slate-200 px-4 py-4 sm:px-6 sm:py-5">
           <div>
