@@ -25,6 +25,17 @@ export const register  = createAsyncThunk(
     }
 )
 
+export const changePassword = createAsyncThunk(
+    '/user/change-password',
+    async(payload,thunkApi)=>{
+        try {
+            const response = await userService.changePassword(payload);
+            return response.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.response.data);
+        }
+    }
+)
 export const createUser = createAsyncThunk(
     '/user/create',
     async(payload,thunkApi) => {
@@ -39,9 +50,9 @@ export const createUser = createAsyncThunk(
 
 export const getUsers = createAsyncThunk(
     '/user/all-users',
-    async(payload,thunkApi) => {
+    async(_,thunkApi) => {
         try {
-            const response = await userService.getUsers(payload);
+            const response = await userService.getUsers();
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data);

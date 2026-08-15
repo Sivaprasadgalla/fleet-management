@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../app/users/userActions";
-import logo from "../../public/fleet-fusion-dark.png";
+import logo from "../media/fleet-fusion-dark.png";
 
 const Register = () => {
   const navigate = useNavigate();

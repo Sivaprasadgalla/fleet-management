@@ -7,7 +7,7 @@ export default function SidebarItem({
 }) {
     return (
         <NavLink
-            to={path}
+            to={path} end
             className={({ isActive }) =>
                 `flex items-center gap-3 rounded-xl px-4 py-3 transition
                 ${

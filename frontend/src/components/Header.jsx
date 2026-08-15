@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../public/fleet-fusion-dark.png";
+import logo from "../media/fleet-fusion-dark.png";
 
 const Header = () => {
   return (

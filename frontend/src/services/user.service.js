@@ -7,6 +7,9 @@ const userService ={
     register(registerdData){
         return api.post(`/user/register`, registerdData);
     },
+    changePassword(data){
+        return api.post('/user/change-password',data);
+    },
     getUsers(){
         return api.get(`/user/all-users`);
     },

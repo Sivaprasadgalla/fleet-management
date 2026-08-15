@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../../public/fleet-fusion-light.png";
+import logo from "../media/fleet-fusion-light.png";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

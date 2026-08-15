@@ -1,8 +1,8 @@
 import { Bell, Search } from "lucide-react";
-import { useSelector } from "react-redux";
 
-export default function DashboardHeader() {
-    const { user } = useSelector((state) => state.auth);
+
+export default function DashboardHeader({user}) {
+  
     const capitalize = (str) =>
   str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
     console.log(user);
@@ -10,7 +10,7 @@ export default function DashboardHeader() {
   return (
     <header className="h-16 bg-white border-b flex items-center justify-between px-8">
       <div className="relative">
-        <Search className="absolute left-3 top-3 text-slate-400" size={18} />
+        {/* <Search className="absolute left-3 top-3 text-slate-400" size={18} /> */}
 
         <input
           placeholder="Search..."
@@ -20,11 +20,11 @@ export default function DashboardHeader() {
 
       <div className="flex items-center gap-5">
         <button className="relative">
-          <Bell />
+          {/* <Bell /> */}
 
-          <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
+          {/* <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
             3
-          </span>
+          </span> */}
         </button>
 
         <div className="flex items-center gap-3">
