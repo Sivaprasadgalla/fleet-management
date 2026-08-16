@@ -10,7 +10,9 @@ import Drivers from "./pages/dashboard/Drivers";
 import Customers from "./pages/dashboard/Customers";
 import SettingsPage from "./pages/dashboard/Settings";
 import { ToastProvider } from "./components/ui/Toast";
-
+import Vehicles from "./pages/dashboard/Vehicles";
+import Expenses from './pages/dashboard/Expenses';
+import Bookings from "./pages/dashboard/Bookings";
 
 const App = () => {
   return (
@@ -31,9 +33,9 @@ const App = () => {
           <Route path='drivers' element={<Drivers/>}/>
           <Route path="customers" element={<Customers />} />
           <Route path="settings" element={<SettingsPage />} />
-          {/* <Route path="vehicles" element={<Vehicles />} />
-
-          <Route path="expenses" element={<Expenses />} />  */}
+          <Route path="vehicles" element={<Vehicles />} />
+          <Route path='bookings' element={<Bookings/>}/>
+         <Route path="expenses" element={<Expenses />} /> 
         </Route>
       </Routes>
     </ToastProvider>

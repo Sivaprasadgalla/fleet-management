@@ -7,10 +7,19 @@ import {
 } from "../../app/drivers/driverAction";
 
 const status = (value) => (
-  <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
+  <span
+    className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+      value == "Available"
+        ? "text-blue-700 bg-blue-50"
+        : value === "Assigned"
+        ? "text-emerald-700 bg-emerald-50"
+        : "text-red-500 bg-red-50"
+    }`}
+  >
     {value || "—"}
   </span>
 );
+
 const driversResource = {
   singular: "Driver",
   plural: "Drivers",

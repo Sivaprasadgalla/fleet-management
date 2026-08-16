@@ -16,7 +16,9 @@ export default function ResourceManagementPage({ resource }) {
   const toast = useToast();
   const state = useSelector((store) => store[resource.storeKey]);
   const loggedInUser = useSelector((store) => store.auth.user);
-  const items = state[resource.itemsKey];
+  const items = Array.isArray(state?.[resource.itemsKey])
+  ? state[resource.itemsKey]
+  : [];
   const [search, setSearch] = useState("");
   const [panel, setPanel] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -123,7 +125,7 @@ export default function ResourceManagementPage({ resource }) {
       );
     }
   };
-
+ console.log(selected)
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}

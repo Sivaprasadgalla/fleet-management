@@ -23,15 +23,15 @@ const bookingSlice = createSlice({
     builder
       .addCase(getBookings.fulfilled, (State, action) => {
         state.loading = false;
-        state.bookings = action.payload;
+        state.bookings = action.payload.data;
       })
       .addCase(getBooking.fulfilled, (state, action) => {
         state.loading = false;
-        state.selectedBooking = action.payload;
+        state.selectedBooking = action.payload.data;
       })
       .addCase(createBooking.fulfilled, (state, action) => {
         state.loading = false;
-        state.bookings.push(action.payload);
+        state.bookings.push(action.payload.data);
         state.message = "Booking Created Successfully";
       })
       .addCase(updateBooking.fulfilled, (state, action) => {
@@ -40,7 +40,7 @@ const bookingSlice = createSlice({
           booking._id === action.payload._id,
         );
         if (index !== -1) {
-          state.bookings[index] = action.payload;
+          state.bookings[index] = action.payload.data;
         }
         state.message = "Booking Updated Successfully";
       })

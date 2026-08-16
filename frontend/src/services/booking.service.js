@@ -4,8 +4,8 @@ const bookingService = {
     createBooking(bookingData){
         return api.post('/booking/create',bookingData);
     },
-    getBookings(){
-        return api.get('/booking/get-bookings');
+    getBookings(userId){
+        return api.get('/booking/get-bookings',{ params: { userId }});
     },
     getBooking(id){
         return api.get(`/booking/get-booking/${id}`)
@@ -13,8 +13,8 @@ const bookingService = {
     updateBooking(id,updatedData){
         return api.put(`/booking/update-booking/${id}`,updatedData);
     },
-    deleteBooking(id){
-        return api.delete(`/booking/delete-booking/${id}`)
+    deleteBooking(id,userId){
+        return api.delete(`/booking/delete-booking/${id}`,{ params: { userId }})
     }
 }
 

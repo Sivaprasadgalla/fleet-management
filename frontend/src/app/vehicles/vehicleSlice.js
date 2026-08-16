@@ -17,22 +17,22 @@ const vehicleSlice = createSlice({
         builder
         .addCase(getVehicles.fulfilled, (state,action)=> {
             state.loading = false;
-            state.vehicles = action.payload;
+            state.vehicles = action.payload.data;
         })
         .addCase(getVehicle.fulfilled, (state,action)=>{
             state.loading = false;
-            state.selectedVehicle = action.payload;
+            state.selectedVehicle = action.payload.data;
         })
         .addCase(createVehicle.fulfilled, (state,action)=>{
             state.loading = false;
-            state.vehicles.push(action.payload);
+            state.vehicles.push(action.payload.data);
             state.message ="Vehicle Created Successfully"
         })
         .addCase(updateVehicle.fulfilled, (state,action)=>{
             state.loading = false;
             const index = state.vehicles.findIndex(vehicle._id === action.payload._id);
             if(index !== -1){
-                state.vehicles[index] = action.payload
+                state.vehicles[index] = action.payload.data
             }
             state.message ="Vehicle Updated Successfully"
         })

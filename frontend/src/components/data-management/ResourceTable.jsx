@@ -73,7 +73,8 @@ export default function ResourceTable({
             All {resource.plural}
           </h2>
           <p className="mt-0.5 text-sm text-slate-500">
-            {rows.length} total {resource.plural.toLowerCase()}
+            {Array.isArray(rows) ? rows.length : 0} total{" "}
+{resource.plural.toLowerCase()}
           </p>
         </div>
         <label className="relative w-full sm:w-auto">
@@ -91,7 +92,7 @@ export default function ResourceTable({
       </div>
       <DataTable
         columns={[...columns, actionColumn]}
-        data={rows}
+         data={Array.isArray(rows) ? rows : []}
         customStyles={styles}
         pagination
         paginationPerPage={10}

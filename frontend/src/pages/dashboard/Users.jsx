@@ -7,7 +7,15 @@ import {
 } from "../../app/users/userActions";
 
 const badge = (value) => (
-  <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium capitalize text-blue-700">
+  <span className={`rounded-full px-3.5 py-2 text-xs font-medium capitalize ${value == "admin" ?  "text-green-700 bg-blue-50"  : "text-blue-900 bg-blue-50" }`}>
+  
+    {value || "—"}
+  </span>
+);
+
+const badgeStatus = (value) => (
+  <span className={`rounded-full px-2.5 py-2 text-xs font-medium capitalize ${value == "active" ?  "text-blue-700 bg-blue-50"  : "text-red-600 bg-red-50" }`}>
+  
     {value || "—"}
   </span>
 );
@@ -18,7 +26,7 @@ const usersResource = {
   storeKey: "users",
   itemsKey: "users",
   description: "Manage users, roles and account status.",
-  searchFields: ["firstName", "lastName", "email", "phoneNumber", "role"],
+  searchFields: ["firstName", "lastName", "email", "phoneNumber", "role", "status"],
   emptyForm: {
     firstName: "",
     lastName: "",
@@ -118,12 +126,27 @@ const usersResource = {
       cell: (row) => <span className="text-slate-600">{row.email || "—"}</span>,
     },
     {
-      name: "PHONE",
+      name: "PHONE NUMBER",
       selector: (row) => row.phoneNumber,
       sortable: true,
       minWidth: "150px",
       cell: (row) => row.phoneNumber || "—",
     },
+   {
+  name: "LAST LOGIN",
+  minWidth:"150px",
+  cell: (row) =>
+    row.lastLogin
+      ? new Date(row.lastLogin).toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      : "Never",
+},
     {
       name: "ROLE",
       selector: (row) => row.role,
@@ -134,7 +157,7 @@ const usersResource = {
       name: "STATUS",
       selector: (row) => row.status,
       sortable: true,
-      cell: (row) => badge(row.status),
+      cell: (row) => badgeStatus(row.status),
     },
   ],
   details: [

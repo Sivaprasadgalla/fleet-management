@@ -4,8 +4,8 @@ const vehicleService = {
     createVehicle(vehicleData){
         return api.post('/vehicle/create',vehicleData)
     },
-    getVehicles(){
-       return api.get('/vehicle/get-vehicles')
+    getVehicles(userId){
+       return api.get('/vehicle/get-vehicles/',{params: { userId }})
     },
     getVehicle(id){
         return api.get(`/vehicle/get-vehicle/${id}`)
@@ -13,8 +13,8 @@ const vehicleService = {
     updateVehicle(id,updateData){
         return api.put(`/vehicle/update-vehicle/${id}`, updateData)
     },
-    deleteVehicle(id){
-        return api.delete(`/vehicle/delete-vehicle/${id}`)
+    deleteVehicle(id, userId){
+        return api.delete(`/vehicle/delete-vehicle/${id}`,{ params: { userId }})
     }
 } 
 
