@@ -16,7 +16,7 @@ const vehicleSchema =new mongoose.Schema({
      required:true 
    },
    year:{
-    type:Date,
+    type:String,
     required:true
    },
    type:{
