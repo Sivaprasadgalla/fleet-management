@@ -42,16 +42,17 @@ const driverSlice = createSlice({
              state.message = "Driver Deleted Successfully";
         })
 
-        .addMatcher(isPending, (state)=>{
-            state.loading = true;
-            state.error = null;
-            state.message =null;
-        })
-        .addMatcher(isRejected, (state,action)=>{
-            state.loading = false;
-            state.message=null;
-            state.error = action.payload || action.payload.message;
-        })
+        .addMatcher(
+            (action) => action.type.startsWith("/driver/") && action.type.endsWith("/pending"),
+            (state) => { state.loading = true; }
+        )
+        .addMatcher(
+            (action) => action.type.startsWith("/driver/") && action.type.endsWith("/rejected"),
+            (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error;
+            }
+        )
     }
 })
 

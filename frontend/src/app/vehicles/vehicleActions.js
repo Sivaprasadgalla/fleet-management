@@ -8,7 +8,7 @@ export const createVehicle = createAsyncThunk(
       const repsonse = await vehicleService.createVehicle(payload);
       return repsonse.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.repsonse.data);
+      return thunkApi.rejectWithValue(error.response?.data);
     }
   },
 );
@@ -44,7 +44,7 @@ export const updateVehicle = createAsyncThunk(
       const response = await vehicleService.updateVehicle(id, payload);
       return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.repsonse.data);
+      return thunkApi.rejectWithValue(error.response?.data);
     }
   },
 );

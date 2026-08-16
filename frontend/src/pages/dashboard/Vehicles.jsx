@@ -8,10 +8,6 @@ import {
   deleteVehicle,
 } from "../../app/vehicles/vehicleActions";
 
-/* -------------------------------------------------------
-   STATUS BADGE
-------------------------------------------------------- */
-
 const badgeStatus = (value) => (
   <span
     className={`rounded-full px-2.5 py-2 text-xs font-medium capitalize ${
@@ -28,22 +24,12 @@ const badgeStatus = (value) => (
   </span>
 );
 
-/* -------------------------------------------------------
-   VEHICLE RESOURCE
-------------------------------------------------------- */
-
 const vehicleResource = {
   singular: "Vehicle",
   plural: "Vehicles",
-
   storeKey: "vehicles",
   itemsKey: "vehicles",
-
   description: "Manage vehicles, insurance, permits and availability.",
-
-  /* -------------------------------------------------------
-     SEARCH FIELDS
-  ------------------------------------------------------- */
 
   searchFields: [
     "registerNumber",
@@ -58,10 +44,6 @@ const vehicleResource = {
     "status",
   ],
 
-  /* -------------------------------------------------------
-     EMPTY FORM
-  ------------------------------------------------------- */
-
   emptyForm: {
     registerNumber: "",
     brand: "",
@@ -75,20 +57,12 @@ const vehicleResource = {
     status: "available",
   },
 
-  /* -------------------------------------------------------
-     CRUD ACTIONS
-  ------------------------------------------------------- */
-
   actions: {
     fetchAll: getVehicles,
     create: createVehicle,
     update: updateVehicle,
     remove: deleteVehicle,
   },
-
-  /* -------------------------------------------------------
-     FORM FIELDS
-  ------------------------------------------------------- */
 
   fields: [
     {
@@ -97,14 +71,12 @@ const vehicleResource = {
       required: true,
       placeholder: "Register Number",
     },
-
     {
       name: "brand",
       label: "Brand",
       required: true,
       placeholder: "Brand",
     },
-
     {
       name: "year",
       label: "Year",
@@ -112,7 +84,6 @@ const vehicleResource = {
       required: true,
       placeholder: "Year",
     },
-
     {
       name: "type",
       label: "Type",
@@ -136,7 +107,6 @@ const vehicleResource = {
         },
       ],
     },
-
     {
       name: "fuelType",
       label: "Fuel Type",
@@ -160,7 +130,6 @@ const vehicleResource = {
         },
       ],
     },
-
     {
       name: "seatCapacity",
       label: "Seat Capacity",
@@ -168,28 +137,24 @@ const vehicleResource = {
       required: true,
       placeholder: "Seat Capacity",
     },
-
     {
       name: "InsuranceNumber",
       label: "Insurance Number",
       required: true,
       placeholder: "Insurance Number",
     },
-
     {
       name: "InsuranceExpiry",
       label: "Insurance Expiry",
       type: "date",
       required: true,
     },
-
     {
       name: "PermitExpiry",
       label: "Permit Expiry",
       type: "date",
       required: true,
     },
-
     {
       name: "status",
       label: "Status",
@@ -329,47 +294,36 @@ const vehicleResource = {
       cell: (row) => badgeStatus(row.status),
     },
   ],
-
-  /* -------------------------------------------------------
-     DETAILS
-  ------------------------------------------------------- */
-
+  
   details: [
     {
       label: "Register Number",
       key: "registerNumber",
     },
-
     {
       label: "Brand",
       key: "brand",
     },
-
     {
       label: "Year",
       key: "year",
     },
-
     {
       label: "Type",
       key: "type",
     },
-
     {
       label: "Fuel Type",
       key: "fuelType",
     },
-
     {
       label: "Seat Capacity",
       key: "seatCapacity",
     },
-
     {
       label: "Insurance Number",
       key: "InsuranceNumber",
     },
-
     {
       label: "Insurance Expiry",
       key: "InsuranceExpiry",
@@ -383,7 +337,6 @@ const vehicleResource = {
             })
           : "—",
     },
-
     {
       label: "Permit Expiry",
       key: "PermitExpiry",
@@ -397,7 +350,6 @@ const vehicleResource = {
             })
           : "—",
     },
-
     {
       label: "Status",
       key: "status",
@@ -406,12 +358,7 @@ const vehicleResource = {
     },
   ],
 
-  /* -------------------------------------------------------
-     DATABASE DATA → FORM
-  ------------------------------------------------------- */
-
-  toForm: (row) => ({
-     
+  toForm: (row) => ({   
     registerNumber: row.registerNumber || "",
     brand: row.brand || "",
     year: row.year || "",
@@ -428,25 +375,17 @@ const vehicleResource = {
     status: row.status || "available",
   }),
 
-  toPayload: (form, userId, vehicleId,selected) => ({
+  toPayload: (form, userId, selected) => ({
     ...form,
     userId,
-    id: vehicleId,
+    id: selected !== null ? selected._id : "",
     registerNumber: form.registerNumber.trim(),
-
     brand: form.brand.trim(),
-
     year: Number(form.year),
-
     seatCapacity: Number(form.seatCapacity),
-
     InsuranceNumber: form.InsuranceNumber.trim(),
-
     InsuranceExpiry: form.InsuranceExpiry,
-
     PermitExpiry: form.PermitExpiry,
-
-   
   }),
 };
 

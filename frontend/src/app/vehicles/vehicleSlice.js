@@ -1,4 +1,4 @@
-import { createSlice, isPending, isRejected } from "@reduxjs/toolkit"
+import { createSlice, isAnyOf, isPending, isRejected } from "@reduxjs/toolkit"
 import { createVehicle, deleteVehicle, getVehicle, getVehicles, updateVehicle } from "./vehicleActions"
 
 const initialState ={
@@ -30,7 +30,9 @@ const vehicleSlice = createSlice({
         })
         .addCase(updateVehicle.fulfilled, (state,action)=>{
             state.loading = false;
-            const index = state.vehicles.findIndex(vehicle._id === action.payload._id);
+            const index = state.vehicles.findIndex(
+                (vehicle) => vehicle._id === action.payload.data?._id,
+            );
             if(index !== -1){
                 state.vehicles[index] = action.payload.data
             }
@@ -38,20 +40,40 @@ const vehicleSlice = createSlice({
         })
         .addCase(deleteVehicle.fulfilled, (state,action)=>{
             state.loading = false;
-            state.vehicles = state.vehicles.filter(vehicle._id !== action.payload._id);
+            state.vehicles = state.vehicles.filter(
+                (vehicle) => vehicle._id !== action.payload.data?._id,
+            );
             state.message ="Vehicle Deleted Successfully"
         })
 
-        .addMatcher(isPending, (state)=>{
-            state.loading = true;
-            state.error = null;
-            state.message =null;
-        })
-        .addMatcher(isRejected, (state,action)=>{
-            state.loading = false;
-            state.error = action.payload || action.payload.message;
-            state.message =null;
-        })
+        .addMatcher(
+            isPending(createVehicle, deleteVehicle, getVehicle, getVehicles, updateVehicle),
+            (state) => {
+                state.loading = true;
+                state.error = null;
+                state.message = null;
+            },
+        )
+        .addMatcher(
+            isRejected(createVehicle, deleteVehicle, getVehicle, getVehicles, updateVehicle),
+            (state, action) => {
+                state.loading = false;
+                state.error = action.payload?.message || action.error?.message || "Request failed";
+                state.message = null;
+            },
+        )
+        .addMatcher(
+            isAnyOf(
+                createVehicle.fulfilled,
+                deleteVehicle.fulfilled,
+                getVehicle.fulfilled,
+                getVehicles.fulfilled,
+                updateVehicle.fulfilled,
+            ),
+            (state) => {
+                state.loading = false;
+            },
+        )
     }
 })
 

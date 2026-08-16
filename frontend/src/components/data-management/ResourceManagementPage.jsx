@@ -125,7 +125,7 @@ export default function ResourceManagementPage({ resource }) {
       );
     }
   };
- console.log(selected)
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
