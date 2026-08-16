@@ -167,6 +167,7 @@ export default function ResourceManagementPage({ resource }) {
             setSelected(item);
             setPanel("view");
           }}
+          loading={state.loading}
           onEdit={openEdit}
           onDelete={setItemToDelete}
         />

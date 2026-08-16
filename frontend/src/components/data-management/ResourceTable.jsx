@@ -1,5 +1,6 @@
 import DataTable from "react-data-table-component";
 import { Eye, Pencil, Search, Trash2 } from "lucide-react";
+import CustomSpinner from "../ui/Spinner";
 
 const styles = {
   headRow: {
@@ -29,6 +30,7 @@ export default function ResourceTable({
   search,
   onSearchChange,
   onView,
+  loading,
   onEdit,
   onDelete,
 }) {
@@ -99,6 +101,8 @@ export default function ResourceTable({
         paginationRowsPerPageOptions={[5, 10, 20]}
         highlightOnHover
         responsive
+        progressPending={loading}
+        progressComponent={<CustomSpinner />}
         persistTableHead
         noDataComponent={
           <div className="py-10 text-sm text-slate-400">
